@@ -18,6 +18,7 @@
 		0C8CF9B627BE6DE200056B34 /* SongMyung-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C8CF9B527BE6DE200056B34 /* SongMyung-Regular.ttf */; };
 		0C8CF9B827BE709500056B34 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8CF9B727BE709500056B34 /* TopViewController.swift */; };
 		0C8CF9BA27BE709C00056B34 /* BottomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8CF9B927BE709C00056B34 /* BottomViewController.swift */; };
+		0C8CF9BC27BE795E00056B34 /* MyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8CF9BB27BE795E00056B34 /* MyLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		0C8CF9B527BE6DE200056B34 /* SongMyung-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SongMyung-Regular.ttf"; sourceTree = "<group>"; };
 		0C8CF9B727BE709500056B34 /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		0C8CF9B927BE709C00056B34 /* BottomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomViewController.swift; sourceTree = "<group>"; };
+		0C8CF9BB27BE795E00056B34 /* MyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				0C8CF9B127BE67D000056B34 /* MyColor.swift */,
 				0C8CF9B327BE6C8200056B34 /* MyButton.swift */,
 				0C8CF9B527BE6DE200056B34 /* SongMyung-Regular.ttf */,
+				0C8CF9BB27BE795E00056B34 /* MyLabel.swift */,
 			);
 			path = MyTipsy;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				0C8CF9B227BE67D000056B34 /* MyColor.swift in Sources */,
 				0C8CF9B427BE6C8200056B34 /* MyButton.swift in Sources */,
 				0C8CF99E27BE66BD00056B34 /* AppDelegate.swift in Sources */,
+				0C8CF9BC27BE795E00056B34 /* MyLabel.swift in Sources */,
 				0C8CF9A027BE66BD00056B34 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
