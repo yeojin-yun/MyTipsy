@@ -12,8 +12,8 @@ class ViewController: UIViewController {
     let topView = UIView()
     let bottomView = UIView()
     
-    let topBtn = MyButton(title: "N빵")
-    let bottomBtn = MyButton(title: "몰빵")
+    let topBtn = MyButton(title: "순진")
+    let bottomBtn = MyButton(title: "버튼")
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true

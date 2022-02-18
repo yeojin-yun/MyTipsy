@@ -8,7 +8,7 @@
 import UIKit
 
 class TopViewController: UIViewController {
-
+    
     let totalLabel = MyLabel(title: "💵 총 금액", size: 30)
     let valueTextField = UITextField()
     let peopleLabel = MyLabel(title: "👫🏻 총 인원", size: 30)
