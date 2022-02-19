@@ -20,10 +20,10 @@ class MyButton: UIButton {
         backgroundColor = UIColor.white
         setTitleColor(.darkGray, for: .normal)
         layer.cornerRadius = 20
-        layer.shadowRadius = 50
+        //layer.shadowRadius = 50
         layer.borderWidth = 2
         layer.shadowColor = UIColor.darkGray.cgColor
-        layer.masksToBounds = true
+        //layer.masksToBounds = true
     }
     
     required init?(coder: NSCoder) {
