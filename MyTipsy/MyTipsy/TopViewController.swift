@@ -17,8 +17,6 @@ class TopViewController: UIViewController {
     let calculateBtn = UIButton()
     let dividedValue = MyLabel(title: "2", size: 30)
     
-    var test: String = ""
-    var testInt: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +38,7 @@ extension TopViewController: UITextFieldDelegate {
         // return -> 텍스트가 바뀌어야 한다면 true, 아니라면 false
         // 이 메소드 내에서 textField.text는 현재 입력된 string이 붙기 전의 string
         
-        print(textField.text)
+        
         
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal // 1,000,000
@@ -84,30 +82,17 @@ extension TopViewController {
     }
     
     @objc func calculateBtnTapped(_ sender: UIButton) {
-        print(valueTextField.text)
-        print(countLabel.text)
-        // 총 금액(valueTextField)을 총인원(countLabel)으로 나누기
-        //        if let totalValue = test, let totalPeople = countLabel.text {
-        //            print("⭐️: \(totalValue)")
-        //            print("⭐️: \(totalPeople)")
-        //
-        //            let safeValue = Int(totalValue) ?? 0
-        //            let safePeople = Int(totalPeople) ?? 0
-        //
-        //            print("📍: \(Int(totalValue))")
-        //
-        //
-        //            print(safeValue)
-        //            print(safePeople)
-        //
-        //            // 나온 금액은 dividedValue에 나타내기
-        //            dividedValue.text = String(safeValue / safePeople)
-        //        }
-        if let totalPeople = countLabel.text {
-            testInt = Int(totalPeople) ?? 0
+
+        //총 금액(valueTextField)을 총인원(countLabel)으로 나누기
+        if let totalValue = valueTextField.text, let totalPeople = countLabel.text {
+            if let safeValue = Int(totalValue.replacingOccurrences(of: ",", with: "")) {
+                let safePeople = Int(totalPeople) ?? 0
+                
+                // 나온 금액은 dividedValue에 나타내기
+                dividedValue.text = MyTipsyBrain().getDecimalValue(safeValue, safePeople)
+            }
         }
-        //print(test)
-        //print(testInt)
+        valueTextField.resignFirstResponder()
     }
 }
 
