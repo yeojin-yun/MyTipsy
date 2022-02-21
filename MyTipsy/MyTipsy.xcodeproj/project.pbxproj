@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0B133C27C3C2B3005C817E /* MyTipsyBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0B133B27C3C2B3005C817E /* MyTipsyBrain.swift */; };
 		0C8CF99E27BE66BD00056B34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8CF99D27BE66BD00056B34 /* AppDelegate.swift */; };
 		0C8CF9A027BE66BD00056B34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8CF99F27BE66BD00056B34 /* SceneDelegate.swift */; };
 		0C8CF9A227BE66BD00056B34 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8CF9A127BE66BD00056B34 /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C0B133B27C3C2B3005C817E /* MyTipsyBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTipsyBrain.swift; sourceTree = "<group>"; };
 		0C8CF99A27BE66BD00056B34 /* MyTipsy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTipsy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C8CF99D27BE66BD00056B34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C8CF99F27BE66BD00056B34 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				0C8CF9B327BE6C8200056B34 /* MyButton.swift */,
 				0C8CF9B527BE6DE200056B34 /* SongMyung-Regular.ttf */,
 				0C8CF9BB27BE795E00056B34 /* MyLabel.swift */,
+				0C0B133B27C3C2B3005C817E /* MyTipsyBrain.swift */,
 			);
 			path = MyTipsy;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C0B133C27C3C2B3005C817E /* MyTipsyBrain.swift in Sources */,
 				0C8CF9BA27BE709C00056B34 /* BottomViewController.swift in Sources */,
 				0C8CF9B827BE709500056B34 /* TopViewController.swift in Sources */,
 				0C8CF9A227BE66BD00056B34 /* ViewController.swift in Sources */,
