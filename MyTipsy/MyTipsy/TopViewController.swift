@@ -9,13 +9,13 @@ import UIKit
 
 class TopViewController: UIViewController {
     
-    let totalLabel = MyLabel(title: "💵 총 금액", size: 30)
-    let valueTextField = UITextField()
-    let peopleLabel = MyLabel(title: "👫🏻 총 인원", size: 30)
-    let countLabel = MyLabel(title: "1", size: 30)
-    let countStepper = UIStepper()
-    let calculateBtn = UIButton()
-    let dividedValue = MyLabel(title: "2", size: 30)
+    let totalLabel = MyLabel(title: "💵 총 금액", size: 30) // 총금액 레이블
+    let valueTextField = UITextField() // 총금액을 입력하는 텍스트필드
+    let peopleLabel = MyLabel(title: "👫🏻 총 인원", size: 30) // 총인원 레이블
+    let countLabel = MyLabel(title: "1", size: 30) // 총 인원수를 나타내는 레이블
+    let countStepper = UIStepper() // 총인원수를 +,-하는 스텝퍼
+    let calculateBtn = MyButton(title: "계산해줘", size: 40) // 계산해줘 버튼
+    let dividedValue = MyLabel(title: "2", size: 50) // 계산된 금액이 표시되는 레이블
     
     
     override func viewDidLoad() {
@@ -54,7 +54,7 @@ extension TopViewController: UITextFieldDelegate {
                     textField.text = formattedString
                     return false
                 }
-            }else{ // 숫자가 아닐 때먽
+            } else { // 숫자가 아닐 때먽
                 if string == "" { // 백스페이스일때
                     let lastIndex = beforeForemattedString.index(beforeForemattedString.endIndex, offsetBy: -1)
                     beforeForemattedString = String(beforeForemattedString[..<lastIndex])
@@ -66,23 +66,35 @@ extension TopViewController: UITextFieldDelegate {
                     return false
                 }
             }
-            
         }
-        
         return true
     }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if valueTextField.text != "" {
+            return true
+        } else {
+            valueTextField.placeholder = "금액을 입력하세요"
+            return false
+        }
+    }
+  
+//    이렇게 하면 금액 입력하자마자 금액이 사라져서 금액을 볼 수 없음
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        valueTextField.text = ""
+//    }
 }
 
 //MARK: -Event
 extension TopViewController {
     @objc func stepperTapped(_ sender: UIStepper) {
-        // 스텝퍼에서 +누르면 countLabel 숫자가 올라가고, -를 누르면 countLabel의 숫자가 내려가도록
+        // 스텝퍼에서 +,-에 따라 숫자가 countLabel에 나오도록
         let senderValue = Int(sender.value)
         countLabel.text = String(senderValue)
     }
     
+    
     @objc func calculateBtnTapped(_ sender: UIButton) {
-
         //총 금액(valueTextField)을 총인원(countLabel)으로 나누기
         if let totalValue = valueTextField.text, let totalPeople = countLabel.text {
             if let safeValue = Int(totalValue.replacingOccurrences(of: ",", with: "")) {
@@ -92,6 +104,7 @@ extension TopViewController {
                 dividedValue.text = MyTipsyBrain().getDecimalValue(safeValue, safePeople)
             }
         }
+        // 계산해줘 버튼을 누른 후에는 키보드 사라지도록
         valueTextField.resignFirstResponder()
     }
 }
@@ -102,29 +115,42 @@ extension TopViewController {
         setAttributes()
         addTarget()
         setConstraints()
+        setUpNavBar()
+    }
+    
+    func setUpNavBar() {
+        //navigationBar 색상 변경
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.backgroundColor = MyColor.greenColor
+        
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
     }
     
     final private func setAttributes() {
+        //텍스트필드 설정
         valueTextField.delegate = self
         valueTextField.borderStyle = .roundedRect
         valueTextField.keyboardType = .numberPad
+        
+        //스텝퍼 설정
         countStepper.value = 1
         
-        [calculateBtn].forEach {
-            $0.setTitle("계산해줘", for: .normal)
-            $0.titleLabel?.font = UIFont(name: "SongMyung-Regular", size: 40)
-            $0.backgroundColor = MyColor.yelloColor
-            $0.setTitleColor(.darkGray, for: .normal)
-            $0.layer.cornerRadius = 20
-            $0.clipsToBounds = true
-        }
-        
-        dividedValue.text = "5,000원"
+        //계산해줘 버튼 설정
+        calculateBtn.backgroundColor = MyColor.yelloColor
+
+        //계산된 금액이 표시될 레이블 설정
+        dividedValue.text = "0원"
+        dividedValue.textColor = MyColor.greenColor
     }
+    
+    
     final private func addTarget() {
         countStepper.addTarget(self, action: #selector(stepperTapped(_:)), for: .valueChanged)
         calculateBtn.addTarget(self, action: #selector(calculateBtnTapped(_:)), for: .touchUpInside)
     }
+    
     
     final private func setConstraints() {
         
@@ -155,7 +181,7 @@ extension TopViewController {
             calculateBtn.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             calculateBtn.widthAnchor.constraint(equalToConstant: 280),
             
-            dividedValue.topAnchor.constraint(equalTo: calculateBtn.bottomAnchor, constant: 80),
+            dividedValue.topAnchor.constraint(equalTo: calculateBtn.bottomAnchor, constant: 100),
             dividedValue.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
         ])

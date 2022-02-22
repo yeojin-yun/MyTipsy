@@ -26,9 +26,6 @@ struct MyTipsyBrain {
         
         let safeNumber = formatter.string(for: result) ?? ""
         return safeNumber + "원"
-        
-//        guard let safeNumber = formatter.string(for: result) else { return true }
-//        return safeNumber
     }
     
 }

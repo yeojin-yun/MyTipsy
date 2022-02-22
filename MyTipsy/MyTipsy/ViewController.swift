@@ -12,8 +12,8 @@ class ViewController: UIViewController {
     let topView = UIView()
     let bottomView = UIView()
     
-    let topBtn = MyButton(title: "N빵")
-    let bottomBtn = MyButton(title: "몰빵")
+    let topBtn = MyButton(title: "N빵", size: 60)
+    let bottomBtn = MyButton(title: "몰빵", size: 60)
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,7 +70,7 @@ extension ViewController {
         let stackBtn = UIStackView(arrangedSubviews: [topBtn, bottomBtn])
         stackBtn.axis = .vertical
         stackBtn.distribution = .fillEqually
-        stackBtn.spacing = 350
+        stackBtn.spacing = 320
         
         [stackView, stackBtn].forEach {
             view.addSubview($0)
@@ -83,7 +83,7 @@ extension ViewController {
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            stackBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 160),
+            stackBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 130),
             stackBtn.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
             topBtn.widthAnchor.constraint(equalToConstant: 130)

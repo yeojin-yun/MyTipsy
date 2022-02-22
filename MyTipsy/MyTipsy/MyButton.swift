@@ -13,10 +13,10 @@ class MyButton: UIButton {
         super.init(frame: frame)
     }
     
-    init(title: String) {
+    init(title: String, size: CGFloat) {
         super.init(frame: .zero)
         setTitle(title, for: .normal)
-        titleLabel?.font = UIFont(name: "SongMyung-Regular", size: 60)
+        titleLabel?.font = UIFont(name: "SongMyung-Regular", size: size)
         backgroundColor = UIColor.white
         setTitleColor(.darkGray, for: .normal)
         layer.cornerRadius = 20
