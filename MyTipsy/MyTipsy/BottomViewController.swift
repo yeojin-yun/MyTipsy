@@ -22,14 +22,10 @@ class BottomViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         view.backgroundColor = .white
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.rowHeight = 60
-        
         textField.delegate = self
     }
+    
+
 }
 
 //MARK: -UITableViewDelegate, UITableViewDataSource
@@ -75,6 +71,17 @@ extension BottomViewController {
     }
 }
 
+//MARK: -Notification Method
+extension BottomViewController {
+    @objc func keyboardWillShow(_ sender: Notification) {
+        self.view.frame.origin.y = -150
+    }
+    
+    @objc func keyboardWillHide(_ sender: Notification) {
+        self.view.frame.origin.y = 0
+    }
+}
+
 //MARK: -UI
 extension BottomViewController {
     final private func configureUI() {
@@ -82,7 +89,22 @@ extension BottomViewController {
         addTarget()
         setConstraints()
         setUpNavBar()
+        setTableView()
+        setNotification()
     }
+    
+    func setNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    func setTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.rowHeight = 60
+    }
+    
     func setUpNavBar() {
         //navigationController?.navigationBar.backgroundColor = UIColor(named: K.BrandColors.blue)
         let navBarAppearance = UINavigationBarAppearance()
