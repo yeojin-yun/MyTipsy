@@ -8,7 +8,7 @@
 import UIKit
 
 class BottomViewController: UIViewController {
-
+    
     let tableView = UITableView()
     let textField = UITextField() // 참여자 이름 입력
     let inputBtn = UIButton() // 참여자 입력 버튼
@@ -21,11 +21,12 @@ class BottomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        setNotification()
         view.backgroundColor = .white
         textField.delegate = self
     }
     
-
+    
 }
 
 //MARK: -UITableViewDelegate, UITableViewDataSource
@@ -37,7 +38,7 @@ extension BottomViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UITableViewCell
         cell.textLabel?.text = peopleArray[indexPath.row]
-        cell.textLabel?.font = UIFont(name: "SongMyung-Regular", size: 30)
+        cell.textLabel?.font = UIFont(name: "SongMyung-Regular", size: 20)
         return cell
     }
 }
@@ -71,14 +72,29 @@ extension BottomViewController {
     }
 }
 
-//MARK: -Notification Method
+//MARK: -UITextField Notificationcenter
 extension BottomViewController {
+    func setNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
     @objc func keyboardWillShow(_ sender: Notification) {
-        self.view.frame.origin.y = -150
+//                self.view.frame.origin.y = -150
+        if let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.view.frame.origin.y -= keyboardHeight
+        }
     }
     
     @objc func keyboardWillHide(_ sender: Notification) {
-        self.view.frame.origin.y = 0
+        //        self.view.frame.origin.y = 0
+        if let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.view.frame.origin.y += keyboardHeight
+        }
     }
 }
 
@@ -90,19 +106,16 @@ extension BottomViewController {
         setConstraints()
         setUpNavBar()
         setTableView()
-        setNotification()
+        
     }
     
-    func setNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
+
     
     func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.rowHeight = 60
+        tableView.rowHeight = 40
     }
     
     func setUpNavBar() {
