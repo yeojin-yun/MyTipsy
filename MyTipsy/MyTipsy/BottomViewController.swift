@@ -13,7 +13,7 @@ class BottomViewController: UIViewController {
     let textField = UITextField() // 참여자 이름 입력
     let inputBtn = UIButton() // 참여자 입력 버튼
     let randomBtn = MyButton(title: "누가 낼래?", size: 40)
-    let resultLbl = MyLabel(title: "윤여진", size: 50) // 몰빵 대상자 레이블
+    //let resultLbl = MyLabel(title: "윤여진", size: 50) // 몰빵 대상자 레이블
     
     
     var peopleArray: [String] = []
@@ -21,12 +21,17 @@ class BottomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        setNotification()
         view.backgroundColor = .white
         textField.delegate = self
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.setNotification()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        self.removeKeyboardNotification()
+    }
 }
 
 //MARK: -UITableViewDelegate, UITableViewDataSource
@@ -45,10 +50,16 @@ extension BottomViewController: UITableViewDelegate, UITableViewDataSource {
 
 //MARK: -UITextFieldDelegate
 extension BottomViewController: UITextFieldDelegate {
+    //리턴 버튼 누르면 키보드 내려감
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
+//        let people = textField.text ?? ""
+//        peopleArray.append(people)
+//        textField.text = ""
+//        tableView.reloadData()
         return true
     }
+    //다른 곳 누르면 키보드 내려감
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -66,9 +77,17 @@ extension BottomViewController {
     }
     
     @objc func randomBtnTapped(_ sender: UIButton) {
-        let randomPerson = peopleArray.randomElement() ?? ""
-        resultLbl.text = randomPerson
         textField.endEditing(true)
+        let randomPerson = peopleArray.randomElement() ?? ""
+        
+        let alert = UIAlertController(title: "몰빵의 주인공", message: randomPerson, preferredStyle: .alert)
+        let action = UIAlertAction(title: "인정할게", style: .default) {  _ in
+            self.peopleArray.removeAll()
+            self.tableView.reloadData()
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -79,12 +98,20 @@ extension BottomViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
+    func removeKeyboardNotification() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     @objc func keyboardWillShow(_ sender: Notification) {
 //                self.view.frame.origin.y = -150
-        if let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
+        if let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            self.view.frame.origin.y -= keyboardHeight
+            let keyboardHeight = keyboardRectangle.height - 140
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardHeight
+            }
+                
         }
     }
     
@@ -92,8 +119,11 @@ extension BottomViewController {
         //        self.view.frame.origin.y = 0
         if let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
             let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            self.view.frame.origin.y += keyboardHeight
+            let keyboardHeight = keyboardRectangle.height - 140
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y += keyboardHeight
+
+            }
         }
     }
 }
@@ -106,10 +136,7 @@ extension BottomViewController {
         setConstraints()
         setUpNavBar()
         setTableView()
-        
     }
-    
-
     
     func setTableView() {
         tableView.delegate = self
@@ -136,7 +163,7 @@ extension BottomViewController {
         textField.placeholder = "몰빵 후보 적고, 입력 누르기"
         textField.autocorrectionType = .no
         randomBtn.backgroundColor = MyColor.yelloColor
-        resultLbl.textColor = MyColor.greenColor
+        //resultLbl.textColor = MyColor.greenColor
     }
     
     final private func addTarget() {
@@ -149,7 +176,7 @@ extension BottomViewController {
         inputStack.axis = .horizontal
         inputStack.spacing = 20
         
-        [tableView, inputStack, randomBtn, resultLbl].forEach {
+        [tableView, inputStack, randomBtn].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -158,7 +185,7 @@ extension BottomViewController {
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -325),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -300),
             
             inputStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             inputStack.topAnchor.constraint(equalTo: tableView.bottomAnchor),
@@ -170,8 +197,8 @@ extension BottomViewController {
             randomBtn.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             randomBtn.widthAnchor.constraint(equalToConstant: 200),
             
-            resultLbl.topAnchor.constraint(equalTo: randomBtn.bottomAnchor, constant: 60),
-            resultLbl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+//            resultLbl.topAnchor.constraint(equalTo: randomBtn.bottomAnchor, constant: 60),
+//            resultLbl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
             
         ])
     }

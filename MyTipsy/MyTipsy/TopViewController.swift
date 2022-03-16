@@ -7,8 +7,11 @@
 
 import UIKit
 
+//리셋버튼
+
 class TopViewController: UIViewController {
     
+
     let totalLabel = MyLabel(title: "💵 총 금액", size: 30) // 총금액 레이블
     let valueTextField = UITextField() // 총금액을 입력하는 텍스트필드
     let peopleLabel = MyLabel(title: "👫🏻 총 인원", size: 30) // 총인원 레이블
@@ -87,6 +90,13 @@ extension TopViewController: UITextFieldDelegate {
 
 //MARK: -Event
 extension TopViewController {
+    @objc func rightBarBtnTapped(_ sender: UIBarButtonItem) {
+        valueTextField.text = ""
+        countStepper.value = 0
+        countLabel.text = "1"
+        dividedValue.text = "0원"
+    }
+    
     @objc func stepperTapped(_ sender: UIStepper) {
         // 스텝퍼에서 +,-에 따라 숫자가 countLabel에 나오도록
         let senderValue = Int(sender.value)
@@ -116,9 +126,14 @@ extension TopViewController {
         addTarget()
         setConstraints()
         setUpNavBar()
+        setUpRightBarButton()
     }
     
-    func setUpNavBar() {
+    final private func setUpRightBarButton() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "리셋", style: .plain, target: self, action: #selector(rightBarBtnTapped(_:)))
+    }
+    
+    final private func setUpNavBar() {
         //navigationBar 색상 변경
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.configureWithOpaqueBackground()
@@ -177,7 +192,7 @@ extension TopViewController {
             peopleStack.topAnchor.constraint(equalTo: peopleLabel.bottomAnchor, constant: 30),
             peopleStack.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            calculateBtn.topAnchor.constraint(equalTo: peopleStack.bottomAnchor, constant: 100),
+            calculateBtn.topAnchor.constraint(equalTo: peopleStack.bottomAnchor, constant: 55),
             calculateBtn.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             calculateBtn.widthAnchor.constraint(equalToConstant: 280),
             

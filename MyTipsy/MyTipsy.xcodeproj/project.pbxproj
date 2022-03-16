@@ -51,6 +51,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C5CDDEE27E17E7000FA8B71 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0C8CF9B327BE6C8200056B34 /* MyButton.swift */,
+				0C8CF9B127BE67D000056B34 /* MyColor.swift */,
+				0C8CF9BB27BE795E00056B34 /* MyLabel.swift */,
+				0C8CF9A327BE66BD00056B34 /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		0C5CDDEF27E17E8900FA8B71 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0C8CF9A127BE66BD00056B34 /* ViewController.swift */,
+				0C8CF9B727BE709500056B34 /* TopViewController.swift */,
+				0C8CF9B927BE709C00056B34 /* BottomViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		0C5CDDF027E17E9C00FA8B71 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0C0B133B27C3C2B3005C817E /* MyTipsyBrain.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0C5CDDF127E17EB700FA8B71 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				0C8CF99D27BE66BD00056B34 /* AppDelegate.swift */,
+				0C8CF99F27BE66BD00056B34 /* SceneDelegate.swift */,
+				0C8CF9A827BE66BE00056B34 /* LaunchScreen.storyboard */,
+				0C8CF9AB27BE66BE00056B34 /* Info.plist */,
+			);
+			name = Supporting;
+			sourceTree = "<group>";
+		};
 		0C8CF99127BE66BD00056B34 = {
 			isa = PBXGroup;
 			children = (
@@ -70,20 +110,12 @@
 		0C8CF99C27BE66BD00056B34 /* MyTipsy */ = {
 			isa = PBXGroup;
 			children = (
-				0C8CF99D27BE66BD00056B34 /* AppDelegate.swift */,
-				0C8CF99F27BE66BD00056B34 /* SceneDelegate.swift */,
-				0C8CF9A127BE66BD00056B34 /* ViewController.swift */,
-				0C8CF9B727BE709500056B34 /* TopViewController.swift */,
-				0C8CF9B927BE709C00056B34 /* BottomViewController.swift */,
-				0C8CF9A327BE66BD00056B34 /* Main.storyboard */,
-				0C8CF9A627BE66BE00056B34 /* Assets.xcassets */,
-				0C8CF9A827BE66BE00056B34 /* LaunchScreen.storyboard */,
-				0C8CF9AB27BE66BE00056B34 /* Info.plist */,
-				0C8CF9B127BE67D000056B34 /* MyColor.swift */,
-				0C8CF9B327BE6C8200056B34 /* MyButton.swift */,
+				0C5CDDF027E17E9C00FA8B71 /* Model */,
+				0C5CDDEE27E17E7000FA8B71 /* View */,
+				0C5CDDEF27E17E8900FA8B71 /* Controller */,
 				0C8CF9B527BE6DE200056B34 /* SongMyung-Regular.ttf */,
-				0C8CF9BB27BE795E00056B34 /* MyLabel.swift */,
-				0C0B133B27C3C2B3005C817E /* MyTipsyBrain.swift */,
+				0C5CDDF127E17EB700FA8B71 /* Supporting */,
+				0C8CF9A627BE66BE00056B34 /* Assets.xcassets */,
 			);
 			path = MyTipsy;
 			sourceTree = "<group>";

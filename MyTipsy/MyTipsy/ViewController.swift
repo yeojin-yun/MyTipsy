@@ -71,42 +71,23 @@ extension ViewController {
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         
-        let stackBtn = UIStackView(arrangedSubviews: [topBtn, bottomBtn])
-        stackBtn.axis = .vertical
-        stackBtn.distribution = .fillEqually
-        //stackBtn.spacing = 330
-        
-        [stackView, stackBtn].forEach {
+        [stackView, topBtn, bottomBtn].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             stackView.topAnchor.constraint(equalTo: view.topAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-//            topBtn.widthAnchor.constraint(equalToConstant: 130),
-//            topBtn.bottomAnchor.constraint(equalTo: topView.bottomAnchor, constant: -180),
-//            topBtn.heightAnchor.constraint(equalToConstant: 30),
-//            bottomBtn.widthAnchor.constraint(equalToConstant: 130),
-//            bottomBtn.bottomAnchor.constraint(equalTo: bottomBtn.bottomAnchor, constant: -180),
             
             topBtn.centerXAnchor.constraint(equalTo: topView.centerXAnchor),
             topBtn.centerYAnchor.constraint(equalTo: topView.centerYAnchor),
-            //topBtn.widthAnchor.constraint(equalToConstant: 130),
-            bottomBtn.centerXAnchor.constraint(equalTo: bottomBtn.centerXAnchor),
-            bottomBtn.centerYAnchor.constraint(equalTo: bottomBtn.centerYAnchor),
-            //bottomBtn.widthAnchor.constraint(equalToConstant: 130),
             
-            stackBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 130),
-            stackBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -150),
-            stackBtn.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            stackBtn.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 120),
-            stackBtn.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -120),
-
-            
+            bottomBtn.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
+            bottomBtn.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor),
         ])
     }
 }
