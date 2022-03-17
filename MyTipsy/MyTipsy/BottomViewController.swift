@@ -195,10 +195,7 @@ extension BottomViewController {
             
             randomBtn.topAnchor.constraint(equalTo: inputStack.bottomAnchor, constant: 60),
             randomBtn.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            randomBtn.widthAnchor.constraint(equalToConstant: 200),
-            
-//            resultLbl.topAnchor.constraint(equalTo: randomBtn.bottomAnchor, constant: 60),
-//            resultLbl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+            randomBtn.widthAnchor.constraint(equalToConstant: 200)
             
         ])
     }
