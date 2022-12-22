@@ -22,4 +22,4 @@
     <img src="![Simulator Screen Recording - iPhone 14 Pro - 2022-12-21 at 23 41 37](https://user-images.githubusercontent.com/85544383/209141417-cefffb93-c929-4021-ae24-4a04a138a368.gif)">
     <img src="![Simulator Screen Recording - iPhone 14 Pro - 2022-12-21 at 23 43 16](https://user-images.githubusercontent.com/85544383/209142214-f32cd491-4578-467a-b601-7f4b13e32dd0.gif)
 ">
-figure>
+
